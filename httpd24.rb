@@ -10,7 +10,9 @@ homepage 'https://httpd.apache.org/'
 
   depends_on 'apr-util'
   depends_on 'pcre'
+  depends_on "openssl"
   depends_on 'lua' => :optional
+  depends_on "homebrew/dupes/zlib"
 
   def install
 
@@ -26,10 +28,13 @@ homepage 'https://httpd.apache.org/'
       "--enable-mods-shared=all",
       "--with-pcre=#{Formula.factory('pcre').prefix}",
       "--enable-layout=Homebrew"
+      "--enable-ssl"
     ]
     args << "--enable-lua" if build.with? 'lua'
     args << "--with-apr=#{Formula["apr"].opt_prefix}"
     args << "--with-apr-util=#{Formula["apr-util"].opt_prefix}"
+    args << "--with-z=#{Formula['zlib'].opt_prefix}"
+    args << "--with-ssl=/usr"
 
     system './configure', *args
     system "make"
