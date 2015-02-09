@@ -27,7 +27,7 @@ homepage 'https://httpd.apache.org/'
       "--enable-mpms-shared=all",
       "--enable-mods-shared=all",
       "--with-pcre=#{Formula.factory('pcre').prefix}",
-      "--enable-layout=Homebrew"
+      "--enable-layout=Homebrew",
       "--enable-ssl"
     ]
     args << "--enable-lua" if build.with? 'lua'
